@@ -13,28 +13,21 @@
  *     }
  * }
  */
-class Solution {
-    public boolean isSameTree(TreeNode p, TreeNode q) {
-        
-        if(p!=null && q!= null && p.val != q.val){
-            return false;
+class Solution 
+{
+    public boolean isSameTree(TreeNode p, TreeNode q) 
+    {
+        if (p == null || q == null) 
+        {
+            return p == q; // Both must be null to return true
         }
 
-        if((p == null && q!=null) ||(p != null && q==null) ){
-            return false;
+        if (p.val != q.val) 
+        {
+            return false; // Values are not the same
         }
 
-        if(p == null && q==null){
-            return true;
-        }
-
-        Boolean flagLeft=false;
-        Boolean flagRight=false;
-        if(p.val == q.val){
-            flagLeft = isSameTree(p.left, q.left);
-            flagRight = isSameTree(p.right, q.right);
-        }
-        return (flagLeft && flagRight);
-
+        // Recursively check left and right subtrees
+        return isSameTree(p.left, q.left) && isSameTree(p.right, q.right);
     }
 }
