@@ -1,21 +1,31 @@
-class Solution 
-{
-    public int climbStairs(int n) 
-    {
-        if (n == 1) 
-        {
+class Solution {
+    public int climbStairs(int n) {
+
+        HashMap<Integer, Integer> memo = new HashMap<>();
+
+        if(n == 1 || n == 2){
+            return n;
+        }
+
+        return countClimb(n, memo);
+
+        //return climbStairs(n-1) + climbStairs(n-2);
+    }
+
+    public int countClimb(int n, HashMap<Integer, Integer> memo){
+        if(n == 1){
+            memo.put(1, 1);
             return 1;
         }
-
-        int[] dp = new int[n + 1];
-        dp[1] = 1;
-        dp[2] = 2;
-
-        for (int i = 3; i <= n; i++) 
-        {
-            dp[i] = dp[i - 1] + dp[i - 2];
+        if(n == 2){
+            memo.put(2, 2);
+            return 2;
+        }
+        if(memo.containsKey(n)){
+            return memo.get(n);
         }
 
-        return dp[n];
+        memo.put(n, (countClimb(n-1, memo) + countClimb(n-2, memo)));
+        return memo.get(n);
     }
 }
