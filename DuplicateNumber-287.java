@@ -5,7 +5,7 @@ class Solution {
 
         // Phase 1: Detect cycle
         do {
-            slow = nums[slow]a;
+            slow = nums[slow];
             fast = nums[nums[fast]];
         } while (slow != fast);
 
