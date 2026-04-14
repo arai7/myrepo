@@ -1,0 +1,31 @@
+class Solution {
+    public int romanToInt(String s) {
+        
+        int len = s.length();
+        int[] map = new int[128];
+        map['I'] = 1;
+        map['V'] = 5;
+        map['X'] = 10;
+        map['L'] = 50;
+        map['C'] = 100;
+        map['D'] = 500;
+        map['M'] = 1000;
+
+        int res = map[s.charAt(0)];
+
+        for(int i = 1; i < len; i++){
+            char ch = s.charAt(i);
+            int curr = map[ch];
+
+            if(curr > map[s.charAt(i-1)]){
+                res = res - map[s.charAt(i-1)];
+                res += curr - map[s.charAt(i-1)];
+            }
+            else{
+                res = res + curr;
+            }
+        }
+
+        return res;
+    }
+}
